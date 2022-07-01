@@ -61,22 +61,27 @@ app.post('/success', function(req,res){
   const city = req.body.city;
   const url1 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5c377f534b91c074b0d50362cbcd4cbe&units=metric";
   https.get(url1, function(response){
-        response.on("data", function(data){
-          const weatherData = JSON.parse(data);
-          const temperature = weatherData.main.temp;
-          const feels_like = weatherData.main.feels_like;
-          const weatherCondition = weatherData.weather[0].description;
-          const icon = weatherData.weather[0].icon;
-          const imgURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        if(response.statusCode == 200){
+          response.on("data", function(data){
+            const weatherData = JSON.parse(data);
+            const temperature = weatherData.main.temp;
+            const feels_like = weatherData.main.feels_like;
+            const weatherCondition = weatherData.weather[0].description;
+            const icon = weatherData.weather[0].icon;
+            const imgURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
-          res.render('weather', {
-            city: lodash.capitalize(city),
-            temperature: temperature,
-            feels_like: feels_like,
-            weatherCondition: weatherCondition,
-            imgURL: imgURL
-          });
-        })
+            res.render('weather', {
+              city: lodash.capitalize(city),
+              temperature: temperature,
+              feels_like: feels_like,
+              weatherCondition: weatherCondition,
+              imgURL: imgURL
+            });
+          })
+        }
+        else{
+          res.sendFile(__dirname + '/success.html');
+        }
     })
 })
 

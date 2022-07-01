@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/Images/icon.ico">
+    <title>Weather Forecast</title>
+  </head>
+  <body class="background text-center">
+    <main class='form-signin1 color'>
+      <h1 class="h3 mb-3 fw-normal color"> Weather Forcast in <%= city %> is as follows :- </h1>
+      <h2 class='color'> Temperature : <%= temperature %> (in Celsius)</h2>
+      <h2 class='color'> Feels Like : <%= feels_like %> (in Celsius)</h2>
+      <h2 class='color'> Weather conditions: <%=weatherCondition %> </h2>
+      <img class="mb-4" src = '<%= imgURL%>'  width="200" height="200">
+    </main>
+  </body>
+</html>
